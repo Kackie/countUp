@@ -16,7 +16,7 @@ created: 2019/02/23
                 num = parseInt(numTxt),
                 animNum = 0,
                 charNum = numTxt.length;
-            $(this).animate(
+            $(this).css('visibility','visible').animate(
                 {'z-index':num},
                 {
                     duration:opts.duration,
@@ -34,6 +34,9 @@ created: 2019/02/23
                             animNum = parseInt(now);
                         }
                         $(this).text(animNum);
+                    },
+                    complete:function(){
+                        $(this).css('z-index','');
                     }
                 }
             )
