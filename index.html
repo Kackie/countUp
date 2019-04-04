@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 <style>
-.js_count{
+.js_count,.js_count2{
    visibility: hidden;
 }
 </style>
@@ -15,7 +15,8 @@
 
 <p class="js_count">120</p>
 
-<p></p>
+<p data-count="2000" class="js_count2">3000</p>
+<button class="countUpdate">カウントアップデート</button>
 
 <p class="js_count3">150</p>
 <button class="countTrigger">カウントスタート</button>
@@ -31,6 +32,14 @@ $(function(){
     zeroPadding : true,
     duration : 1000,
     easing:'swing'
+   });
+   $('.js_count2').countUp({
+    zeroPadding : true,
+    dataCount : true,
+    duration : 3000,
+    easing:'swing'
+   });
+   $('.countUpdate').click(function(){
    });
    $('.countTrigger').click(function(){
       $('.js_count3').countUp();
