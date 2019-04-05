@@ -13,13 +13,9 @@
 </head>
 <body>
 
-<p class="js_count">120</p>
-
-<p data-count="2000" class="js_count2">3000</p>
-<button class="countUpdate">カウントアップデート</button>
-
-<p class="js_count3">150</p>
-<button class="countTrigger">カウントスタート</button>
+<p class="js_count">100</p>
+<p class="js_count js_countTo" data-count="100">1200</p>
+<button class="plus">+100</button><button class="minus">-100</button>
 
 <script
 src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -29,20 +25,9 @@ crossorigin="anonymous"></script>
 <script>
 $(function(){
    $('.js_count').countUp({
-    zeroPadding : true,
-    duration : 1000,
-    easing:'swing'
-   });
-   $('.js_count2').countUp({
-    zeroPadding : true,
-    dataCount : true,
-    duration : 3000,
-    easing:'swing'
-   });
-   $('.countUpdate').click(function(){
-   });
-   $('.countTrigger').click(function(){
-      $('.js_count3').countUp();
+      zeroPadding : true,
+      duration : 1000,
+      easing:'swing'
    });
 });
 </script>

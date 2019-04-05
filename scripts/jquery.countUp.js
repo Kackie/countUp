@@ -11,43 +11,43 @@ created: 2019/02/23
             dataCount : false,
         };
         var opts = $.extend({}, $.fn.countUp.defaults, options);
-        
         this.each(function(index){
-            var defNum = (opts.dataCount === true) ? parseInt($(this).text()) : 0,
-                numTxt = (opts.dataCount === true) ? $(this).data('count') : parseInt($(this).text()),
-                num = parseInt(numTxt),
-                animNum = 0,
-                charNum = numTxt.length,
-                displayNum;
-            $(this).css('visibility','visible').animate(
-                {'z-index':num},
+            $.fn.countUp.countTo($(this),opts);
+            return this;
+        });
+    };
+    $.fn.countUp.countTo = function($obj,opts){
+        var beforeNum,afterNum,displayNum,letterNum;
+            if($obj.attr('data-count') !== undefined){
+                beforeNum = parseInt($obj.text());
+                afterNum = parseInt($obj.data('count'));
+            }else{
+                beforeNum = 0;
+                afterNum = parseInt($obj.text());
+            }
+            displayNum = 0;
+            letterNum = String(afterNum).length;
+            $obj.css({
+                'visibility':'visible',
+                'top':beforeNum
+            }).animate(
+                {'top':afterNum},
                 {
                     duration:opts.duration,
-                    easing:opts.easing,
-                    step:function(now, fx){
+                    step:function(now){
+                        displayNum = parseInt(now);
                         if(opts.zeroPadding === true){
-                            var nowNum = parseInt(now),
-                                nowLength = String(nowNum).length;
-                            if(nowLength < charNum){
-                                animNum = ('0000000' + String(nowNum)).slice(-charNum);
-                            }else{
-                                animNum = parseInt(now);
+                            var numLength = String(displayNum).length;
+                            if(numLength < letterNum){
+                                displayNum = ('0000000' + String(displayNum)).slice(-letterNum);
                             }
-                        }else{
-                            animNum = parseInt(now);
                         }
-                        if(defNum > animNum){
-                            displayNum = defNum - animNum;
-                        }else{
-                            displayNum = defNum + animNum;
-                        }
-                        $(this).text(displayNum);
+                        $obj.text(displayNum);
                     },
                     complete:function(){
-                        $(this).css('z-index','');
+                        $obj.css('top','');
                     }
                 }
-            )
-        });
+            );
     };
   }(jQuery));
